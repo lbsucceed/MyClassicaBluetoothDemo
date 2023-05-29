@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/start_bluetooth"
+        android:orderInCategory="100"
+        android:title="打开蓝牙"/>
+    <item
+        android:id="@+id/find_bluetooth"
+        android:orderInCategory="100"
+        android:title="搜索设备"/>
+    <item
+        android:id="@+id/disconnect_bluetooth"
+        android:orderInCategory="100"
+        android:title="关闭连接"/>
+    <item
+        android:id="@+id/go_back"
+        android:orderInCategory="100"
+        android:title="退出软件"/>
+
+</menu>
