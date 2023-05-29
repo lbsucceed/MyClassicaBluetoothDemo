@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Ciallo+I+am+lb)](https://git.io/typing-svg)   
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Hiallo+I+am+lb)](https://git.io/typing-svg)   
 This is a raw programmer's first work,maybe this is easy to do,but hard for me.
 
 
