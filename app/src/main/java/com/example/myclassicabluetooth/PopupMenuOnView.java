@@ -21,7 +21,11 @@ public class PopupMenuOnView {
     }
 }
 
+
 class DimBackgroundClass {
+
+
+
     public static void dimBackground(Activity activity, final float from, final float to) {
         final Window window = activity.getWindow();
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(from, to);

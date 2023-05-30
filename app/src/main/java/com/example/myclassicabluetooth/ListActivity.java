@@ -12,25 +12,30 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public class ListActivity extends AppCompatActivity {
+    //选择连接设备地址
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
     private ArrayAdapter<String> listAdapter;
+    int RESULT_OK = 1;
     private BluetoothAdapter mAdapter;
 
+    /**
+     * 使用广播寻找其他设备
+     */
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @SuppressLint("MissingPermission")
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();//获取蓝牙设备
+            String action = intent.getAction();
+            //获取蓝牙设备
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 //传入打包数据
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -105,7 +110,7 @@ public class ListActivity extends AppCompatActivity {
 
         ListView lv_device = findViewById(R.id.listView);
         lv_device.setAdapter(listAdapter);
-        //选择连接设备
+        //选择连接设备并传输数据给intent
         lv_device.setOnItemClickListener((adapterView, v, i, l) -> {
             String info = ((TextView) v).getText().toString();
             if (info.equals("没有已配对设备")) {
@@ -114,7 +119,11 @@ public class ListActivity extends AppCompatActivity {
                 String address = info.substring(info.length() - 17);
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
-                setResult(Activity.RESULT_OK, intent);
+
+                Log.d("点击蓝牙", "点击成功");
+                Log.d("点击蓝牙", address);
+                setResult(RESULT_OK, intent);
+                Log.d("点击蓝牙", "选择成功");
                 finish();
             }
         });

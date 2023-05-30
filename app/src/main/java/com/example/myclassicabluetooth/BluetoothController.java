@@ -28,7 +28,7 @@ public class BluetoothController {
 
     //系统打开蓝牙
      @SuppressLint("MissingPermission")
-     public void turnOnBluetooth(Activity activity , int requestCode){
+     public void turnOnBluetooth(Activity activity , int requestCode) {
         activity.startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE), requestCode);
      }
 

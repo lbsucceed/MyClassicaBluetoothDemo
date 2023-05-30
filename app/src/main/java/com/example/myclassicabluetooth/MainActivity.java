@@ -33,7 +33,7 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_TURN_TO_MAIN = 1;
+
     Button menu;
     BluetoothController bluetoothController;
     public  String TAG = "mainActivity";
@@ -49,32 +49,32 @@ public class MainActivity extends AppCompatActivity {
             ("00001101-0000-1000-8000-00805F9B34FB");
     BluetoothDevice device;
     BluetoothAdapter mAdapter;
-    BluetoothManager bluetoothManager;
 
 
+
+
+    //传入回调信息
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.d(TAG, "onActivityResult: yyyy");
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Activity.RESULT_OK){
-            String address = data.getExtras().getString(ListActivity.EXTRA_DEVICE_ADDRESS);
-            mAdapter = BluetoothAdapter.getDefaultAdapter();
-            device = mAdapter.getRemoteDevice(address);
-            ConnectThread(device);
-        }else if (requestCode == REQUEST_CODE_TURN_ON_BLUETOOTH_ADAPTER){
-            if (resultCode == Activity.RESULT_OK){
+        Log.d(TAG, "onActivityResult: 运行了");
+        if(requestCode ==REQUEST_CODE_SEARCH_BLUETOOTH_DEVICES && requestCode == Activity.RESULT_OK) {
 
-            }
-        }
-        else if (requestCode == REQUEST_CODE_TURN_TO_MAIN) {
-            if (resultCode == Activity.RESULT_OK){
+                String address = data.getExtras().getString(ListActivity.EXTRA_DEVICE_ADDRESS);
+                mAdapter = BluetoothAdapter.getDefaultAdapter();
+                device = mAdapter.getRemoteDevice(address);
+                Log.d(TAG, address);
+                ConnectThread(device);
 
-            }
+
         }
     }
 
     @SuppressLint("MissingPermission")
     public void ConnectThread(BluetoothDevice device) {
         //用服务号得到socket
+
         mAdapter.cancelDiscovery();
         try {
             mSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         //连接socket
         try {
             mSocket.connect();
+            Log.e("蓝牙未连接成功", "为什么？");
             Toast.makeText(this, "连接成功", Toast.LENGTH_SHORT).show();
             mInputStreamForAdapter = mSocket.getInputStream();
             //CONNECT_STATUS = true;
@@ -104,33 +105,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //发送蓝牙数据
-    static void write(Context context, String word){
-        if (mSocket != null){
-            try {
-                mOutputStreamForAdapter = mSocket.getOutputStream();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if (null != mOutputStreamForAdapter){
-            try {
-                mOutputStreamForAdapter.write(word.getBytes());
-                Toast toast = Toast.makeText(context, word, Toast.LENGTH_SHORT);
-                toast.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            Log.e("SendCommand", "mOutputStreamForAdapter = null");
-        }
-    }
+//    static void write(Context context, String word){
+//        if (mSocket != null){
+//            try {
+//                mOutputStreamForAdapter = mSocket.getOutputStream();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//        if (null != mOutputStreamForAdapter){
+//            try {
+//                mOutputStreamForAdapter.write(word.getBytes());
+//                Toast toast = Toast.makeText(context, word, Toast.LENGTH_SHORT);
+//                toast.show();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }else {
+//            Log.e("SendCommand", "mOutputStreamForAdapter = null");
+//        }
+//    }
 
 
     //接收返回的蓝牙数据
     static String readStr;
-    /**
-     * 判断是否开启了连接，最好不要直接使用（false）这种直接标识，而声明一个Boolean属性，以前是报错了，现在不知道为什么。
-     */
+
     static boolean startReceive = true;
     void receive(){
         byte[] byteArray = new byte[1024];
@@ -186,11 +185,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1);
+ //  startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1);
         menu = findViewById(R.id.menu_button);
         bluetoothController = new BluetoothController();
         initPermission();
         initView();
+
         receive();
 
 
