@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     //传入回调信息
+    //TODO:为什么没有运行
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        Log.d(TAG, "onActivityResult: yyyy");
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: 运行了");
         if(requestCode ==REQUEST_CODE_SEARCH_BLUETOOTH_DEVICES && requestCode == Activity.RESULT_OK) {

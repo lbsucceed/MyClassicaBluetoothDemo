@@ -76,12 +76,6 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-        registerFilter();
-
-    }
-
-
-    public void registerFilter() {
         //注册寻找的广播
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         filter.addAction("ACTION_ACL_DISCONNECTED");
@@ -128,7 +122,11 @@ public class ListActivity extends AppCompatActivity {
             }
         });
         PrintDevice();
+
     }
+
+
+
     //打印已配对设备
     @SuppressLint("MissingPermission")
     public void PrintDevice() {
