@@ -4,6 +4,6 @@ This is a raw programmer's first work,maybe this is easy to do,but hard for me.
 
 # Classical Bluetooth
 
- This is a connection about HC-05 and HC-06 ,Now I have implement the find and open bluetooth function ,but it also have some problem about connect ,I will do my best to find the bug .
+ 这是一个可连接经典蓝牙的demo,主要目的是为了与HC-05，HC-06进行连接，进而操控单片机行为。目前只是实现了打开和搜索功能，但由于一些目前还不清楚的原因，list界面的回调信息并没有被主界面接收，所以连接这一块还是有些问题，争取在这一周内完成并解决这个bug。
 
-if there have some problem ,please tell me about this.
+if there have some problem ,please take issues about it.
