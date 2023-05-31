@@ -30,11 +30,13 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.ToDoubleBiFunction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     Button menu;
+    Button button;
     BluetoothController bluetoothController;
     public  String TAG = "mainActivity";
 
@@ -148,10 +150,10 @@ public class MainActivity extends AppCompatActivity {
                             int byteLength = mInputStreamForAdapter.read(byteArray);
                             readStr = new String(byteArray, 0, byteLength);
                             MainActivity.readStr = readStr;
-                            Log.e("mainactivity", MainActivity.readStr);
-                            Log.e(TAG, "readStr: "+readStr);
+                            Log.d("mainactivity", MainActivity.readStr);
+                            Log.d(TAG, "readStr: "+readStr);
                             if ( readStr.charAt(0) == '1'){
-                                Log.e(TAG, "get it");
+                                Log.d(TAG, "get it");
                             }
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -187,11 +189,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
  //  startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1);
         menu = findViewById(R.id.menu_button);
+        button = findViewById(R.id.button);
         bluetoothController = new BluetoothController();
         initPermission();
         initView();
 
         receive();
+
 
 
 
@@ -271,6 +275,8 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+        button.setOnClickListener(this);
+
     }
 
     //动态申请权限
@@ -291,6 +297,14 @@ public class MainActivity extends AppCompatActivity {
         mPermissionList.add(Manifest.permission.CHANGE_WIFI_STATE);
         ActivityCompat.requestPermissions
                 (this, mPermissionList.toArray(new String[0]), 111);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if(id == R.id.button){
+            write(MainActivity.this, "BEGIN");
+        }
     }
 
 
