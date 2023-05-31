@@ -54,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     //传入回调信息
-    //TODO:为什么没有运行
+    //TODO:已解决不能连接的问题
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: 运行了");
-        if(requestCode ==REQUEST_CODE_SEARCH_BLUETOOTH_DEVICES && requestCode == Activity.RESULT_OK) {
+        if(requestCode ==REQUEST_CODE_SEARCH_BLUETOOTH_DEVICES ) {
 
                 String address = data.getExtras().getString(ListActivity.EXTRA_DEVICE_ADDRESS);
                 mAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -105,26 +105,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //发送蓝牙数据
-//    static void write(Context context, String word){
-//        if (mSocket != null){
-//            try {
-//                mOutputStreamForAdapter = mSocket.getOutputStream();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        if (null != mOutputStreamForAdapter){
-//            try {
-//                mOutputStreamForAdapter.write(word.getBytes());
-//                Toast toast = Toast.makeText(context, word, Toast.LENGTH_SHORT);
-//                toast.show();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }else {
-//            Log.e("SendCommand", "mOutputStreamForAdapter = null");
-//        }
-//    }
+    static void write(Context context, String word){
+        if (mSocket != null){
+            try {
+                mOutputStreamForAdapter = mSocket.getOutputStream();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (null != mOutputStreamForAdapter){
+            try {
+                mOutputStreamForAdapter.write(word.getBytes());
+                Toast toast = Toast.makeText(context, word, Toast.LENGTH_SHORT);
+                toast.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            Log.e("SendCommand", "mOutputStreamForAdapter = null");
+        }
+    }
 
 
     //接收返回的蓝牙数据

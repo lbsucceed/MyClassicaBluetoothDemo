@@ -23,6 +23,7 @@ import java.util.Set;
 public class ListActivity extends AppCompatActivity {
     //选择连接设备地址
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    public final int REQUEST_CODE_SEARCH_BLUETOOTH_DEVICES =11;
     private ArrayAdapter<String> listAdapter;
     int RESULT_OK = 1;
     private BluetoothAdapter mAdapter;
@@ -116,7 +117,7 @@ public class ListActivity extends AppCompatActivity {
 
                 Log.d("点击蓝牙", "点击成功");
                 Log.d("点击蓝牙", address);
-                setResult(RESULT_OK, intent);
+                setResult(REQUEST_CODE_SEARCH_BLUETOOTH_DEVICES, intent);
                 Log.d("点击蓝牙", "选择成功");
                 finish();
             }
