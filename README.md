@@ -4,6 +4,6 @@ This is a raw programmer's first work,maybe this is easy to do,but hard for me.
 
 # Classical Bluetooth
 
- 这是一个可连接经典蓝牙的demo,主要目的是为了与HC-05，HC-06进行连接，进而操控单片机行为。目前只是实现了打开和搜索功能，但由于一些目前还不清楚的原因，list界面的回调信息并没有被主界面接收，所以连接这一块还是有些问题，争取在这一周内完成并解决这个bug。
+ 这是一个可连接经典蓝牙的demo,主要目的是为了与HC-05，HC-06进行连接，进而操控单片机行为。现在已经能连接并接收数据传输数据了，达到了所需要的效果。下图有一个demo。
 
 if there have some problem ,please take issues about it.
